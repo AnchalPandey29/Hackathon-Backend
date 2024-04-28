@@ -78,23 +78,22 @@ exports.createEmployee = async (req, res, next) => {
     const user = new User({
       user_id: emp_id,
       email,
-      password: hashedPassword, // Store hashed password in the database
+      password: hashedPassword,
     });
 
     await user.save();
 
-    // Send email to the user with emp_id, email, and password
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "agarwalpriyanshu168@gmail.com", // Your email address
-        pass: "fhkrzrztygqmibsn ", // Your email password
+        user: "agarwalpriyanshu168@gmail.com",
+        pass: "fhkrzrztygqmibsn ",
       },
     });
 
     const mailOptions = {
-      from: "agarwalpriyanshu168@gmail.com", // Sender address
-      to: email, // Recipient address
+      from: "agarwalpriyanshu168@gmail.com",
+      to: email,
       subject: "Welcome to the Company!",
       html: `
         <p>Hello ${name},</p>
